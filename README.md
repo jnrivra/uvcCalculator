@@ -7,6 +7,23 @@
 
 Simulador avanzado de dosis UV-C para sistemas de desinfección de aire en ductos HVAC. Incluye visualización 3D en tiempo real, simulación de partículas y algoritmos de optimización.
 
+## 📸 Capturas de Pantalla
+
+### Dashboard Principal
+<img src="docs/images/dashboard-main.png" alt="Dashboard Principal" width="100%">
+
+*Interfaz unificada con panel de control, visualización 3D y métricas en tiempo real*
+
+### Visualización 3D Interactiva
+<img src="docs/images/3d-visualization.png" alt="Visualización 3D" width="100%">
+
+*Sistema de partículas mostrando el flujo de aire y la distribución de tubos UV-C*
+
+### Panel de Configuración
+<img src="docs/images/parameters-panel.png" alt="Panel de Parámetros" width="100%">
+
+*Configuración detallada de parámetros del sistema con validación en tiempo real*
+
 ## ✨ Características
 
 ### 🎯 Núcleo de Simulación
