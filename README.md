@@ -9,20 +9,29 @@ Simulador avanzado de dosis UV-C para sistemas de desinfección de aire en ducto
 
 ## 📸 Capturas de Pantalla
 
-### Dashboard Principal
-<img src="docs/images/dashboard-main.png" alt="Dashboard Principal" width="100%">
+> **Nota**: Las capturas de pantalla están siendo preparadas. Para agregar las imágenes, ejecuta `./add-screenshots.sh` con tus capturas.
 
-*Interfaz unificada con panel de control, visualización 3D y métricas en tiempo real*
+### Dashboard Principal
+Vista unificada mostrando:
+- Panel de control con todos los parámetros (izquierda)
+- Visualización 3D del ducto y tubos UV-C (centro)
+- Métricas en tiempo real: Dosis mín: 2.2 mJ/cm², promedio: 4.3 mJ/cm² (derecha)
+- Gráficos de distribución y perfil longitudinal
 
 ### Visualización 3D Interactiva
-<img src="docs/images/3d-visualization.png" alt="Visualización 3D" width="100%">
-
-*Sistema de partículas mostrando el flujo de aire y la distribución de tubos UV-C*
+- Sistema de partículas animado mostrando flujo de aire
+- 5 tubos UV-C con distribución optimizada (1 superior, 2 inferior, 2 laterales)
+- Efecto glow púrpura en los tubos
+- Indicadores ENTRADA → SALIDA
+- Grid de referencia y controles de órbita
 
 ### Panel de Configuración
-<img src="docs/images/parameters-panel.png" alt="Panel de Parámetros" width="100%">
-
-*Configuración detallada de parámetros del sistema con validación en tiempo real*
+- Dimensiones del ducto: 50x50x200 cm
+- Lámpara seleccionada: TUV T5 HO 31W (11.5W UV-C)
+- Slider para 1-10 tubos
+- Velocidad del aire: 2 m/s
+- Reflectividad ajustable: 30%
+- Condiciones ambientales: 20°C, 50% humedad
 
 ## ✨ Características
 
