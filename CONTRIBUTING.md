@@ -230,21 +230,17 @@ cd uvcCalculator
 # Instalar dependencias
 npm install
 
-# Configurar pre-commit hooks
-npm run prepare
-
 # Iniciar desarrollo
 npm run dev
 ```
 
 ### Scripts Disponibles
 ```bash
-npm run dev        # Servidor de desarrollo
+npm run dev        # Servidor de desarrollo (http://localhost:3070)
+npm start          # Alias de npm run dev
 npm run build      # Build de producción
 npm run preview    # Preview del build
-npm run test       # Ejecutar tests
-npm run lint       # Linting
-npm run format     # Formatear código
+npm run lint       # Linting con ESLint
 ```
 
 ### Estructura de Branches

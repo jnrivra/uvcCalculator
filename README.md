@@ -1,261 +1,205 @@
-# 🔬 Calculador UV-C Profesional
+# 🔬 Calculador UV-C Pro
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
-[![Three.js](https://img.shields.io/badge/Three.js-0.160-black.svg)](https://threejs.org/)
+> Simulador interactivo de dosis UV-C para sistemas de desinfección de aire en ductos HVAC, con visualización 3D, mapa de dosis y optimización del posicionamiento de los tubos germicidas.
 
-Simulador avanzado de dosis UV-C para sistemas de desinfección de aire en ductos HVAC. Incluye visualización 3D en tiempo real, simulación de partículas y algoritmos de optimización.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB.svg?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF.svg?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js-0.158-000000.svg?logo=three.js&logoColor=white)](https://threejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3-38B2AC.svg?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-## 📸 Capturas de Pantalla
+---
 
-> **Nota**: Las capturas de pantalla están siendo preparadas. Para agregar las imágenes, ejecuta `./add-screenshots.sh` con tus capturas.
+## 📖 ¿Qué hace?
 
-### Dashboard Principal
-Vista unificada mostrando:
-- Panel de control con todos los parámetros (izquierda)
-- Visualización 3D del ducto y tubos UV-C (centro)
-- Métricas en tiempo real: Dosis mín: 2.2 mJ/cm², promedio: 4.3 mJ/cm² (derecha)
-- Gráficos de distribución y perfil longitudinal
+El **Calculador UV-C Pro** modela la dosis germicida que reciben las partículas de aire al atravesar un ducto HVAC equipado con lámparas UV-C. Permite a un ingeniero de bioseguridad o de climatización dimensionar un sistema de desinfección **antes de instalarlo**:
 
-### Visualización 3D Interactiva
-- Sistema de partículas animado mostrando flujo de aire
-- 5 tubos UV-C con distribución optimizada (1 superior, 2 inferior, 2 laterales)
-- Efecto glow púrpura en los tubos
-- Indicadores ENTRADA → SALIDA
-- Grid de referencia y controles de órbita
+- Estima la **dosis UV-C** (mJ/cm²) en cada punto de la sección del ducto a partir de la potencia de las lámparas, la geometría del ducto y la velocidad del aire.
+- Identifica **zonas muertas** (dosis insuficiente) y calcula **uniformidad** y **cobertura**.
+- Sugiere el **posicionamiento óptimo de los tubos** mediante algoritmos metaheurísticos.
+- Estima **consumo energético**, **vida útil de las lámparas** y **costos de operación**.
+- Incluye una **base de datos de lámparas comerciales** (Philips TUV, OSRAM PURITEC, Atlantic UV, Steril-Aire, entre otras).
 
-### Panel de Configuración
-- Dimensiones del ducto: 50x50x200 cm
-- Lámpara seleccionada: TUV T5 HO 31W (11.5W UV-C)
-- Slider para 1-10 tubos
-- Velocidad del aire: 2 m/s
-- Reflectividad ajustable: 30%
-- Condiciones ambientales: 20°C, 50% humedad
+El repositorio incluye además la **hoja de datos de la lámpara Philips TUV T5** (`datasheet TUV T5.pdf`) usada como referencia para los parámetros.
 
 ## ✨ Características
 
-### 🎯 Núcleo de Simulación
-- **Modelo de fuente lineal** para cálculos precisos de irradiancia
-- **Simulación de partículas** con acumulación de dosis en tiempo real
-- **Factores ambientales**: temperatura, humedad, reflectividad
-- **Base de datos** de lámparas UV-C comerciales (Philips, OSRAM, etc.)
+### 🎯 Motor de simulación
+- **Modelo de irradiancia por ley del inverso del cuadrado** con superposición de múltiples tubos.
+- **Mapa de dosis 2D** de 100×100 sobre la sección transversal del ducto.
+- **Correcciones ambientales** por temperatura, humedad y reflectividad de las paredes.
+- **Análisis longitudinal** de la dosis acumulada a lo largo del ducto.
+- **Estadísticas completas**: dosis mínima, máxima, promedio, desviación estándar, uniformidad y cobertura.
+- **Detección de zonas muertas** bajo el umbral objetivo.
 
 ### 🎨 Visualización 3D
-- **Renderizado WebGL** con Three.js y React Three Fiber
-- **Flujo de partículas animado** mostrando trayectorias de aire
-- **Posicionamiento inteligente de tubos** con algoritmo optimizado
-- **Vista expandible** a pantalla completa
+- **Renderizado WebGL** con Three.js y React Three Fiber.
+- **Flujo de partículas animado** mostrando la trayectoria del aire (ENTRADA → SALIDA).
+- **Posicionamiento automático de tubos** según su cantidad (inferior, laterales, distribución por caras).
+- **Vista expandible** a pantalla completa con controles de órbita (rotar, zoom, paneo).
 
-### 📊 Análisis Avanzado
-- **Mapa de calor de dosis** con gradientes de color
-- **Estadísticas detalladas**: min, max, promedio, desviación estándar
-- **Gráficos de distribución** con Chart.js
-- **Cálculo de uniformidad** y eficiencia del sistema
+### 📊 Análisis y métricas
+- **Dashboard de resultados** con gráficos de distribución y perfil longitudinal (Chart.js).
+- **Cálculo de uniformidad y eficiencia** del sistema.
+- **Auditoría de cálculos** para validar la consistencia física de los resultados.
+- **Estimación de costos operativos** y **cronograma de reemplazo** de lámparas.
 
-### 🤖 Optimización
-- **Algoritmo Genético** para posicionamiento óptimo
-- **Particle Swarm Optimization (PSO)**
-- **Simulated Annealing** para refinamiento
-- **Optimización multi-objetivo**: dosis vs uniformidad
+### 🤖 Optimización del posicionamiento
+Tres algoritmos metaheurísticos para distribuir los tubos buscando maximizar uniformidad, cobertura o eficiencia:
+- **Algoritmo Genético** (selección, cruce, mutación).
+- **Particle Swarm Optimization (PSO)**.
+- **Simulated Annealing**.
 
-## 🚀 Inicio Rápido
+## 🧱 Stack tecnológico
 
-### Opción 1: Versión Portable (Sin Instalación)
+| Capa | Tecnología |
+|------|-----------|
+| Lenguaje | TypeScript 5.2 |
+| UI | React 18.2 |
+| Build / dev server | Vite 5 |
+| 3D | Three.js 0.158 + React Three Fiber + Drei |
+| Gráficos | Chart.js + react-chartjs-2 |
+| Estilos | Tailwind CSS 3.3 |
+| Iconos | react-icons |
+
+## 🚀 Inicio rápido
+
+### Requisitos
+- Node.js 18+ y npm 9+
+
+### Desarrollo local
 ```bash
-# Descarga el archivo HTML portable
-wget https://github.com/user/repo/releases/download/v1.0/CalculadorUVC_Portable.html
-
-# Abre con cualquier navegador
-open CalculadorUVC_Portable.html
-```
-
-### Opción 2: Desarrollo Local
-```bash
-# Clonar repositorio
-git clone https://github.com/user/calculador-uvc.git
-cd calculador-uvc
+# Clonar el repositorio
+git clone https://github.com/jnrivra/uvcCalculator.git
+cd uvcCalculator
 
 # Instalar dependencias
 npm install
 
-# Iniciar servidor de desarrollo
+# Iniciar el servidor de desarrollo (abre http://localhost:3070)
 npm run dev
-
-# Abrir en navegador
-open http://localhost:3070
 ```
 
-### Opción 3: Build de Producción
+### Build de producción
 ```bash
-# Compilar para producción
+# Compilar TypeScript y generar el bundle en dist/
 npm run build
 
-# Crear versión standalone
-node create-portable.js
-
-# Servir archivos compilados
+# Previsualizar el build de producción
 npm run preview
 ```
 
-## 📖 Uso
+### Versiones portables (un solo archivo HTML)
+Tras ejecutar `npm run build`, puedes empaquetar la aplicación en un único archivo HTML para compartir sin servidor:
 
-### Parámetros de Entrada
+```bash
+# Versión 100% autónoma (sin internet) → CalculadorUVC_Portable.html
+node create-portable.js
 
-#### Dimensiones del Ducto
-- **Ancho**: 10-200 cm
-- **Alto**: 10-200 cm  
-- **Largo**: 50-500 cm
+# Versión standalone con dependencias desde CDN → CalculadorUVC.html
+node create-standalone.js
+```
 
-#### Configuración UV-C
-- **Lámpara**: Selección de base de datos (Philips TUV T5 31.3W, etc.)
-- **Número de Tubos**: 1-12 tubos
-- **Reflectividad**: 0-95% (típico 50-70% para metal)
+Ambos archivos se abren directamente con doble clic en cualquier navegador moderno.
 
-#### Condiciones Operativas
-- **Velocidad del Aire**: 0.5-10 m/s
-- **Temperatura**: -10 a 50°C
-- **Humedad Relativa**: 0-100%
+## 🎛️ Uso
 
-### Interpretación de Resultados
+### Parámetros de entrada
 
-| Dosis UV-C | Efectividad | Reducción Log |
+| Parámetro | Rango | Notas |
+|-----------|-------|-------|
+| Ancho del ducto | 10–200 cm | |
+| Alto del ducto | 10–200 cm | |
+| Largo del ducto | 50–500 cm | |
+| Lámpara | Base de datos | Philips, OSRAM, Atlantic UV, etc. |
+| Número de tubos | 1–12 | Posicionamiento automático |
+| Velocidad del aire | 0.5–10 m/s | Define el tiempo de exposición |
+| Dosis objetivo | mJ/cm² | Umbral para evaluar cobertura |
+| Reflectividad | 0–95 % | Material de las paredes |
+| Temperatura | -10 a 50 °C | Corrección de irradiancia |
+| Humedad relativa | 0–100 % | Corrección de irradiancia |
+
+### Interpretación de la dosis UV-C
+
+| Dosis UV-C | Efectividad | Reducción log |
 |------------|-------------|---------------|
-| > 40 mJ/cm² | Excelente | 4+ log (99.99%) |
-| 25-40 mJ/cm² | Buena | 3-4 log (99.9%) |
-| 12-25 mJ/cm² | Moderada | 2-3 log (99%) |
+| > 40 mJ/cm² | Excelente | 4+ log (99.99 %) |
+| 25–40 mJ/cm² | Buena | 3–4 log (99.9 %) |
+| 12–25 mJ/cm² | Moderada | 2–3 log (99 %) |
 | < 12 mJ/cm² | Insuficiente | < 2 log |
 
-## 🏗️ Arquitectura
+## 🧮 Modelo de cálculo
+
+### Irradiancia (fuente puntual, ley del inverso del cuadrado)
+La irradiancia que aporta cada tubo en un punto de la sección se calcula como:
+
+```
+I = (P_UVC · 1000) / (4 · π · (r + 1)²) · f_reflexión · f_temp · f_humedad
+```
+
+donde:
+- `P_UVC` = salida UV-C de la lámpara (W)
+- `r` = distancia radial al tubo (cm)
+- `f_reflexión = 1 + ρ · 0.3` (ρ = reflectividad, 0–1)
+- `f_temp = 1 - |T - 20| · 0.002`
+- `f_humedad = 1 - (HR - 50) · 0.001`
+
+La irradiancia total en cada punto es la suma de los aportes de todos los tubos.
+
+### Dosis acumulada
+```
+D = I_total · t_exposición       t_exposición = L_ducto / (v_aire · 100)
+```
+
+con `L_ducto` en cm y `v_aire` en m/s, obteniendo el tiempo de residencia de la partícula dentro del ducto.
+
+> Nota: el modelo está pensado como herramienta de **dimensionamiento y comparación de configuraciones**, no como sustituto de una validación dosimétrica de campo.
+
+## 🗂️ Estructura del proyecto
 
 ```
 src/
-├── components/          # Componentes React
-│   ├── Viewer3D.tsx    # Visualización Three.js
-│   ├── ParticleFlow.tsx # Sistema de partículas
-│   └── ResultsPanel.tsx # Panel de resultados
-├── physics/            # Motor de física
-│   ├── uvCalculations.ts # Cálculos de irradiancia
-│   ├── tubePositioning.ts # Algoritmos de posicionamiento
-│   └── calculationAudit.ts # Validación de cálculos
-├── optimization/       # Algoritmos de optimización
-│   ├── genetic.ts     # Algoritmo genético
-│   ├── pso.ts        # Particle Swarm
-│   └── annealing.ts  # Simulated Annealing
-├── data/              # Datos y configuración
-│   └── lamps.ts      # Base de datos de lámparas
-└── types/            # Definiciones TypeScript
+├── App.tsx                       # Componente raíz y estado de la simulación
+├── components/
+│   ├── ControlPanel.tsx          # Panel de parámetros de entrada
+│   ├── Viewer3D.tsx              # Visualización 3D (Three.js / R3F)
+│   ├── ParticleFlow.tsx         # Sistema de partículas de aire
+│   ├── ResultsDashboard.tsx     # Métricas y gráficos
+│   └── OptimizationEngine.tsx   # UI de los algoritmos de optimización
+├── physics/
+│   ├── irradiance.ts            # Cálculo de irradiancia y mapa de dosis
+│   ├── longitudinalAnalysis.ts  # Análisis longitudinal de la dosis
+│   ├── tubePositioning.ts       # Posicionamiento automático de tubos
+│   ├── optimization.ts          # Genético, PSO y simulated annealing
+│   └── calculationAudit.ts      # Validación de consistencia de cálculos
+├── data/
+│   └── lamps.ts                 # Base de datos de lámparas y costos
+└── types/
+    └── index.ts                 # Definiciones TypeScript
 ```
 
-## 🔧 Configuración
+Para una descripción detallada de la arquitectura, el flujo de datos y los módulos, consulta **[ARCHITECTURE.md](ARCHITECTURE.md)**. El catálogo completo de funcionalidades está en **[docs/FEATURES.md](docs/FEATURES.md)**.
 
-### Variables de Entorno
-```bash
-# .env
-VITE_PORT=3070
-VITE_API_URL=http://localhost:3000
-```
+## 📸 Capturas de pantalla
 
-### Configuración de Lámparas
-```typescript
-// src/data/lamps.ts
-{
-  id: 'TUV-T5-31.3W',
-  model: 'TUV T5 31.3W UV-C',
-  manufacturer: 'Philips',
-  power: 75,           // Potencia total (W)
-  uvcOutput: 31.3,     // Salida UV-C (W)
-  efficiency: 41.7,    // Eficiencia (%)
-  lifetime: 9000,      // Vida útil (horas)
-  spectrum: 253.7      // Longitud de onda (nm)
-}
-```
-
-## 📊 Algoritmos y Modelos
-
-### Modelo de Irradiancia de Fuente Lineal
-```typescript
-// Irradiancia desde fuente lineal cilíndrica
-I = (P_linear) / (2 * π * r)
-
-donde:
-- P_linear = Potencia UV-C / Longitud del tubo (W/m)
-- r = Distancia radial al tubo (m)
-```
-
-### Factor de Reflexión
-```typescript
-// Multiplicador por reflexiones múltiples
-M_reflection = 1 + (ρ * 0.5) + (ρ² * 0.25) + ...
-
-donde:
-- ρ = Reflectividad del material (0-1)
-```
-
-### Acumulación de Dosis
-```typescript
-// Dosis acumulada por partícula
-D = ∫(I(t) * dt) desde t=0 hasta t=L/v
-
-donde:
-- I(t) = Irradiancia en posición(t)
-- L = Longitud del ducto
-- v = Velocidad del aire
-```
-
-## 🧪 Testing
-
-```bash
-# Tests unitarios
-npm run test
-
-# Tests E2E
-npm run test:e2e
-
-# Coverage
-npm run test:coverage
-```
-
-## 📈 Performance
-
-- **FPS objetivo**: 60 FPS en visualización 3D
-- **Partículas máximas**: 1000 simultáneas
-- **Tiempo de cálculo**: < 100ms para configuración típica
-- **Tamaño del bundle**: ~1.2 MB (producción)
-- **Tamaño portable**: ~25 KB (HTML standalone)
+> Las capturas aún no están incorporadas al repositorio. Para generarlas, ejecuta la aplicación en local (`npm run dev`) y usa el script auxiliar `./add-screenshots.sh /ruta/a/tus/imagenes` para copiarlas a `docs/images/`. Los nombres esperados se describen en [docs/screenshots.md](docs/screenshots.md).
 
 ## 🤝 Contribuir
 
-Ver [CONTRIBUTING.md](CONTRIBUTING.md) para detalles sobre:
-- Código de conducta
-- Proceso de pull requests
-- Estándares de código
-- Configuración del entorno de desarrollo
-
-## 📝 Licencia
-
-Este proyecto está licenciado bajo MIT License - ver [LICENSE](LICENSE) para detalles.
-
-## 🙏 Agradecimientos
-
-- **Three.js** - Gráficos 3D WebGL
-- **React Three Fiber** - React renderer para Three.js
-- **Tailwind CSS** - Framework de estilos
-- **Chart.js** - Visualización de datos
-- **Vite** - Build tool
+Las contribuciones son bienvenidas. Revisa **[CONTRIBUTING.md](CONTRIBUTING.md)** para conocer el flujo de trabajo, los estándares de código y la convención de commits.
 
 ## 📚 Referencias
 
-1. Kowalski, W. (2009). *Ultraviolet Germicidal Irradiation Handbook*
-2. ASHRAE (2019). *Chapter 62: Ultraviolet Air and Surface Treatment*
-3. Philips Lighting. *UV-C Disinfection Application Guide*
-4. IUVA (2020). *UV Dose Guidelines for SARS-CoV-2*
+1. Kowalski, W. (2009). *Ultraviolet Germicidal Irradiation Handbook*.
+2. ASHRAE (2019). *Chapter 62: Ultraviolet Air and Surface Treatment*.
+3. Philips Lighting. *UV-C Disinfection Application Guide*.
+4. IUVA (2020). *UV Dose Guidelines for SARS-CoV-2*.
 
-## 📧 Contacto
+## 📝 Licencia
 
-- **Issues**: [GitHub Issues](https://github.com/user/calculador-uvc/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/user/calculador-uvc/discussions)
+Distribuido bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
-Desarrollado con ❤️ para la comunidad de ingeniería HVAC y bioseguridad
+Desarrollado con ❤️ para la comunidad de ingeniería HVAC y bioseguridad.
